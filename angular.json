@@ -119,6 +119,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "fence"
+    }
+  },
+  "defaultProject": "fence",
+  "cli": {
+    "analytics": false
+  }
 }
