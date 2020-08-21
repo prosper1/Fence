@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule,ReactiveFormsModule, FormBuilder, FormGroup } from '@angular/forms';
+import { HttpClientModule} from '@angular/common/http'
 import { AppRoutingModule, PageRoutes } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavComponent } from './shared/nav/nav.component';
@@ -26,6 +27,8 @@ import { AuthenticationComponent } from './authentication/authentication.compone
   imports: [
     BrowserModule,
     ReactiveFormsModule,
+    HttpClientModule,
+    FormsModule,
     // FormBuilder,
     // FormGroup,
     // Validators,
