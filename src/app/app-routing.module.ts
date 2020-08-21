@@ -13,8 +13,6 @@ import { ContactComponent } from './contact/contact.component';
 import { HomeComponent } from './home/home.component';
 
 
-
-
 const routes: Routes = [
   {
     path : '',
