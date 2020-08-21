@@ -1,5 +1,6 @@
 import { NgModule, Component } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { Routes, RouterModule, ActivatedRoute } from '@angular/router';
+import { FormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ProductsComponent } from './shop/products/products.component';
 import { ProductDetailsComponent } from './shop/product-details/product-details.component';
 import { CartComponent } from './shop/cart/cart.component';
@@ -59,8 +60,11 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  imports: [
+    RouterModule.forRoot(routes),
+    FormsModule,
+  ],
+  exports: [RouterModule],
 })
 export class AppRoutingModule { }
 
@@ -76,5 +80,5 @@ export const PageRoutes = [
   HomeComponent,
   TrackOrderComponent,
 
-]
+];
 
