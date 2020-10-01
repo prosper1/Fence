@@ -11,6 +11,9 @@ import { ServicesComponent } from './services/services.component';
 import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { AuthenticationComponent } from './authentication/authentication.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
+
 
 @NgModule({
   declarations: [
@@ -33,6 +36,8 @@ import { AuthenticationComponent } from './authentication/authentication.compone
     // FormGroup,
     // Validators,
     AppRoutingModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent]
