@@ -6,7 +6,7 @@ import { Observable, of, throwError } from 'rxjs';
 const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json'})
 };
-const apiUrl = 'http://www.khonis.co.za/';
+const apiUrl = 'http://localhost:8000/';
 
 @Injectable({
   providedIn: 'root'
