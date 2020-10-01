@@ -19,7 +19,7 @@ export class ShopService {
 
   products(): Observable<any> {
     const url = apiUrl + 'apis';
-    return this.http.get(url + '/products', httpOptions).pipe(
+    return this.http.get(url + '/open-products/', httpOptions).pipe(
       tap(_ => console.log('fetch products'))
     );
   }
