@@ -17,10 +17,18 @@ export class ShopService {
     private http: HttpClient,
   ) { }
 
+  // Remember the trailing slash, API doesnt resolve
   products(): Observable<any> {
     const url = apiUrl + 'apis';
-    return this.http.get(url + '/open-products/', httpOptions).pipe(
+    return this.http.get(url + '/open-products/?app_name=fence', httpOptions).pipe(
       tap(_ => console.log('fetch products'))
+    );
+  }
+
+  productDetails(productID): Observable<any> {
+    const url = apiUrl + 'apis';
+    return this.http.get(url + '/open-products/' + productID + '/', httpOptions).pipe(
+      tap(_ => console.log('detailed'))
     );
   }
 
