@@ -1,3 +1,4 @@
+import { ToastService } from './../../toast.service';
 import { Component, OnInit } from '@angular/core';
 import { ShopService } from './../../_services/shop.service';
 import { ActivatedRoute, Router, NavigationExtras } from '@angular/router';
@@ -27,6 +28,7 @@ export class ProductDetailsComponent implements OnInit {
     public shopService: ShopService,
     private router: Router,
     private route: ActivatedRoute,
+    private toast: ToastService,
   ) {
     this.route.queryParams.subscribe(params => {
       if (this.router.getCurrentNavigation().extras.state) {
@@ -44,14 +46,11 @@ export class ProductDetailsComponent implements OnInit {
     products.push(productName);
     this.shopService.addToCart({'products': products}, '10').then(res => {
       console.log(res);
-      this.handleSuccessToast('yes');
+      this.toast.showSuccess('Great', 'item added to cart');
     }, err => {
-      this.handleSuccessToast('no');
+      this.toast.showError('Oops', 'Something went wrong try again, if this persist relax we are solving the issue');
     });
   }
 
-  handleSuccessToast(msg: string) {
-     
-  }
 
 }
