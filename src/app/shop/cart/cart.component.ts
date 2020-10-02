@@ -43,7 +43,7 @@ export class CartComponent implements OnInit {
     });
   }
 
-
+  // make order request and link proceed to payments
   placeOrder(){
     this.toast.showSuccess('placing order', 'your order is been requested');
     this.router.navigateByUrl('/track-order');
