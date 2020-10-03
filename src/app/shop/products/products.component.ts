@@ -38,7 +38,7 @@ export class ProductsComponent implements OnInit {
       });
   }
 
-  goto(id:any) {
+  goto(id: any) {
     const filteredProducts = this.productsList.filter(prod => prod.id === id);
     const navigationExtras: NavigationExtras = {
       state: {

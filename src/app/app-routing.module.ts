@@ -27,6 +27,10 @@ const routes: Routes = [
     component : ProductsComponent,
   },
   {
+    path : 'product-details',
+    component : ProductDetailsComponent,
+  },
+  {
     path : 'auth',
     component : AuthenticationComponent
   },
