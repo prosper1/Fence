@@ -2,7 +2,7 @@
     <div class="container">
   
       <!-- Brand -->
-      <a class="navbar-brand" href="overview.html">
+      <a class="navbar-brand" routerLink="/#welcome" routerLinkActive="active">
         <img class="logo-icon" src="../../../assets/icon.png">
       </a>
   
@@ -42,10 +42,15 @@
         <!-- Nav -->
         <ul class="navbar-nav ml-xl-4">
           <li class="nav-item">
-            <a class="nav-link" data-toggle="modal" href="#modalShoppingCart">
-              <span data-cart-items="2">
-                <i class="fe fe-shopping-cart"></i>
-              </span>
+            <a class="nav-link" routerLink="/cart" routerLinkActive="active">  
+                    <i class="fe fe-shopping-cart">
+                      <span class='badge badge-warning' id='lblCartCount'> {{cartItems}} </span>
+                    </i>
+              <!-- <span data-cart-items="cartItems">
+                <i class="fe fe-shopping-cart">
+                  <span class='badge badge-warning' id='lblCartCount'> 5 </span>
+                </i>
+              </span> -->
             </a>
           </li>
         </ul>

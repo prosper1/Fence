@@ -39,6 +39,9 @@ export class CartComponent implements OnInit {
     await this.rest.getCart().then(data => {
       this.cartData = data[0];
       this.products = data[0].products;
+      localStorage.setItem('cart', JSON.stringify(this.cartData));
+      localStorage.setItem('cart-products', JSON.stringify(this.products));
+      localStorage.setItem('cart-id', this.cartData.id.toString());
       console.log(data[0].products);
     });
   }

@@ -21,6 +21,7 @@ export class ProductDetailsComponent implements OnInit {
     ],
     quantity: 1,
     discription: 2,
+    color: 'black'
   };
   itemCount: any;
 
@@ -29,6 +30,7 @@ export class ProductDetailsComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private toast: ToastService,
+    // public store: Storage,
   ) {
     this.route.queryParams.subscribe(params => {
       if (this.router.getCurrentNavigation().extras.state) {
@@ -46,6 +48,7 @@ export class ProductDetailsComponent implements OnInit {
     products.push(productName);
     this.shopService.addToCart({'products': products}, '10').then(res => {
       console.log(res);
+      // this.store.set('cart', { products: products});
       this.toast.showSuccess('Great', 'item added to cart');
     }, err => {
       this.toast.showError('Oops', 'Something went wrong try again, if this persist relax we are solving the issue');

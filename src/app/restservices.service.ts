@@ -7,27 +7,33 @@ import { Observable, of, throwError } from 'rxjs';
 const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json'})
 };
-const apiUrl = 'http://www.khonis.co.za/';
+const apiUrl = 'http://localhost:8000/';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class RestservicesService {
+  isLoggedIn = false;
+  redirectUrl: string;
 
   constructor(private http: HttpClient) { }
 
   login(logins): Observable<any> {
     const url = apiUrl + 'rest-auth/login/';
     return this.http.post(url, logins, httpOptions).pipe(
-      tap(_ => console.log(`login success`)),
+      tap(_ =>
+        this.isLoggedIn = true
+        ),
+        catchError(this.handleError('login', []))
     );
   }
 
   register(accountInfo): Observable<any> {
     const url = apiUrl + 'rest-auth/login/';
     return this.http.post(url, accountInfo, httpOptions).pipe(
-      tap(_ => console.log(`login success`)),
+      tap(_ => this.isLoggedIn = true),
+      catchError(this.handleError('login', []))
     );
   }
 

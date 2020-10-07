@@ -1,7 +1,10 @@
+import { CartComponent } from './shop/cart/cart.component';
+import { Storage } from 'angular-storage';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule,ReactiveFormsModule, FormBuilder, FormGroup } from '@angular/forms';
-import { HttpClientModule} from '@angular/common/http'
+import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup } from '@angular/forms';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { TokenInterceptor } from './interceptors/token.interceptor';
 import { AppRoutingModule, PageRoutes } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavComponent } from './shared/nav/nav.component';
@@ -14,7 +17,6 @@ import { AuthenticationComponent } from './authentication/authentication.compone
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,6 +28,7 @@ import { ToastrModule } from 'ngx-toastr';
     PageRoutes,
     LoginComponent,
     RegisterComponent,
+    CartComponent,
   ],
   imports: [
     BrowserModule,
@@ -39,7 +42,14 @@ import { ToastrModule } from 'ngx-toastr';
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
   ],
-  providers: [],
+  providers: [
+    CartComponent,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

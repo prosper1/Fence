@@ -45,7 +45,7 @@ export class ProductsComponent implements OnInit {
         product: filteredProducts
       }
     };
-    this.router.navigate(['product-details'], navigationExtras);
+    this.router.navigate(['product-details', id], navigationExtras);
   }
 
   gotoCart() {

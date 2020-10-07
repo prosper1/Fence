@@ -1,3 +1,4 @@
+import { CartComponent } from './../shop/cart/cart.component';
 import { RestservicesService } from './../restservices.service';
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -13,11 +14,13 @@ import { first } from 'rxjs/operators';
 export class AuthenticationComponent implements OnInit {
 
   form: FormGroup;
+  registerForm: FormGroup;
   loading = false;
   submitted = false;
   returnUrl: string;
   constructor(
     private restApi: RestservicesService,
+    private cart: CartComponent,
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
@@ -25,6 +28,11 @@ export class AuthenticationComponent implements OnInit {
 
   ngOnInit(): void {
     this.form = this.formBuilder.group({
+      email: ['', Validators.required, Validators.email],
+      password: ['', Validators.required]
+  });
+
+    this.registerForm = this.formBuilder.group({
       email: ['', Validators.required, Validators.email],
       password: ['', Validators.required]
   });
@@ -56,6 +64,8 @@ export class AuthenticationComponent implements OnInit {
 
     this.restApi.login(auth)
     .subscribe(res => {
+      localStorage.setItem('token', res.key);
+      this.cart.fetchUpdatedCart();
       this.router.navigate([this.returnUrl]);
       console.log(res);
     }, err => {
@@ -64,4 +74,32 @@ export class AuthenticationComponent implements OnInit {
     });
   }
 
+ onRegister(){
+
+    this.submitted = true;
+
+    // stop here if form is invalid
+    if (this.form.invalid) {
+      return;
+    }
+
+    this.loading = true;
+
+    //use the rest service here.
+    const auth = {
+      email: this.f.email.value,
+      password: this.f.password.value
+    };
+
+    this.restApi.login(auth)
+    .subscribe(res => {
+      localStorage.setItem('token', res.key);
+      this.cart.fetchUpdatedCart();
+      this.router.navigate([this.returnUrl]);
+      console.log(res);
+    }, err => {
+      console.log(err);
+      this.loading = false;
+    });
+  }
 }
