@@ -33,17 +33,20 @@ export class AuthenticationComponent implements OnInit {
   });
 
     this.registerForm = this.formBuilder.group({
+      username: ['', Validators.required],
       email: ['', Validators.required, Validators.email],
-      password: ['', Validators.required]
+      password: ['', Validators.required],
+      password2: ['', Validators.required],
   });
 
     // get return url from route parameters or default to '/'
-    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/shop';
 
   }
 
   // convenience getter for easy access to form fields
   get f() { return this.form.controls; }
+  get rf() { return this.registerForm.controls; }
 
   onSubmit(){
 
@@ -74,32 +77,33 @@ export class AuthenticationComponent implements OnInit {
     });
   }
 
- onRegister(){
+  onRegister(){
 
-    this.submitted = true;
+      this.submitted = true;
 
-    // stop here if form is invalid
-    if (this.form.invalid) {
-      return;
+      // stop here if form is invalid
+      if (this.form.invalid) {
+        return;
+      }
+
+      this.loading = true;
+
+      //use the rest service here.
+      const auth = {
+        username: this.rf.username.value,
+        email: this.rf.email.value,
+        password: this.rf.password.value
+      };
+
+      this.restApi.register(auth)
+      .subscribe(res => {
+        localStorage.setItem('token', res.key);
+        this.cart.fetchUpdatedCart();
+        this.router.navigate([this.returnUrl]);
+        console.log(res);
+      }, err => {
+        console.log(err);
+        this.loading = false;
+      });
     }
-
-    this.loading = true;
-
-    //use the rest service here.
-    const auth = {
-      email: this.f.email.value,
-      password: this.f.password.value
-    };
-
-    this.restApi.login(auth)
-    .subscribe(res => {
-      localStorage.setItem('token', res.key);
-      this.cart.fetchUpdatedCart();
-      this.router.navigate([this.returnUrl]);
-      console.log(res);
-    }, err => {
-      console.log(err);
-      this.loading = false;
-    });
-  }
 }
